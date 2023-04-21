@@ -3481,19 +3481,29 @@ impl PartialOrd for MultiAsset {
 }
 
 #[wasm_bindgen]
+#[derive(
+    Clone, Debug, Eq, Ord, PartialEq, PartialOrd, serde::Serialize, serde::Deserialize, JsonSchema,
+)]
 pub struct MintsAssets(Vec<MintAssets>);
 
+impl_to_from!(MintsAssets);
+
+#[wasm_bindgen]
 impl MintsAssets {
     pub fn new() -> Self {
         Self(Vec::new())
     }
 
-    pub fn add(&mut self, mint_assets: MintAssets) {
-        self.0.push(mint_assets)
+    pub fn len(&self) -> usize {
+        self.0.len()
     }
 
     pub fn get(&self, index: usize) -> Option<MintAssets> {
         self.0.get(index).map(|v| v.clone())
+    }
+
+    pub fn add(&mut self, mint_assets: MintAssets) {
+        self.0.push(mint_assets)
     }
 }
 
