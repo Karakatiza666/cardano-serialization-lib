@@ -21,6 +21,10 @@ impl MintWitness {
     pub fn new_plutus_script(plutus_script: &PlutusScriptSource, redeemer: &Redeemer) -> MintWitness {
         MintWitness(MintWitnessEnum::Plutus(plutus_script.0.clone(), redeemer.clone()))
     }
+
+    pub fn new_from_plutus_witness(plutus_witness: &PlutusWitness) -> MintWitness {
+        MintWitness(MintWitnessEnum::Plutus(plutus_witness.script_source().0, plutus_witness.redeemer()))
+    }
 }
 
 #[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]

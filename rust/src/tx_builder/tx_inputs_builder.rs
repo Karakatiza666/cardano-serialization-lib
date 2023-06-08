@@ -180,6 +180,10 @@ impl PlutusWitness {
         }
     }
 
+    pub fn script_source(&self) -> PlutusScriptSource {
+        PlutusScriptSource(self.script.clone())
+    }
+
     pub fn datum(&self) -> Option<PlutusData> {
         match &self.datum {
             Some(DatumSourceEnum::Datum(datum)) => Some(datum.clone()),
@@ -191,7 +195,7 @@ impl PlutusWitness {
         self.redeemer.clone()
     }
 
-    fn clone_with_redeemer_index(&self, index: &BigNum) -> Self {
+    pub fn clone_with_redeemer_index(&self, index: &BigNum) -> Self {
         Self {
             script: self.script.clone(),
             datum: self.datum.clone(),
